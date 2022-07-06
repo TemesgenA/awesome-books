@@ -4,26 +4,38 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/style.css" />
-    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Awesome Books</title>
   </head>
 
   <body>
     <h1>Awesome Books</h1>
-    <h3>First Book</h3>
-    <p>Lorem, ipsum.</p>
-    <button>Remove</button>
-    <hr>
-    <h3>Second Book</h3>
-    <p>Lorem, ipsum.</p>
-    <button>Remove</button>
-    <hr>
-    <form action="/add-book.html">
-      <input type="text" id="booktitle" name="booktitle" value="Title" /><br /><br />
-      <input type="text" id="author" name="author" value="Author" /><br /><br />
-      <input type="submit" value="Add" />
-      <label></label>
+    <div id="books"></div>
+    <h3>Book one</h3>
+    <p>James Cameron</p>
+    <button type="button" class="btn-remove">Remove</button>
+    <hr />
+    <h3>Book two</h3>
+    <p>David Oyedepo</p>
+    <button type="button" class="btn-remove">Remove</button>
+    <hr />
+    <form>
+      <input
+        type="text"
+        id="book-title"
+        name="book-title"
+        placeholder="Book title"
+        required
+      /><br /><br />
+      <input
+        type="text"
+        id="book-author"
+        name="book-author"
+        placeholder="Author"
+        required
+      /><br /><br />
+      <button type="submit">Add</button>
     </form>
-    <script src="scripts/script.js"></script>
+    <script src="scripts/app.js"></script>
   </body>
 </html>
