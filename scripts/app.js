@@ -53,3 +53,16 @@ function displayBooks() {
     booksList.appendChild(bookDiv);
   });
 }
+
+// Event to remove a book
+booksList.addEventListener("click", removeBook);
+function removeBook(e) {
+  const item = e.target;
+  if (item.classList[0] === "remove-btn") {
+    const books = JSON.parse(localStorage.getItem("books"));
+    const indexInd = Number(item.dataset.id);
+    const modified = books.filter((book) => book.index !== indexInd);
+    localStorage.setItem("books", JSON.stringify(modified));
+  }
+  displayBooks();
+}
