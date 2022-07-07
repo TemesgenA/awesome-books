@@ -3,6 +3,9 @@ const bookTitle = document.querySelector('#title');
 const bookAuthor = document.querySelector('#author');
 const addBookBtn = document.querySelector('.add-book');
 
+// Initilise books list
+const booksList = document.querySelector('.books-list');
+
 // Event to add a book to local storage
 addBookBtn.addEventListener("click", addBook);
 function addBook() {
@@ -13,9 +16,40 @@ function addBook() {
   book.author = bookAuthor.value;
   book.index = books.length;
   books.push(book);
-  
+
   localStorage.setItem("books", JSON.stringify(books));
   bookTitle.value = "";
   bookAuthor.value = "";
   displayBooks();
+}
+
+// Event to display books
+window.addEventListener("load", booksList);
+
+// Function to display books
+function displayBooks() {
+  const books = JSON.parse(localStorage.getItem("books")) || [];
+
+  if (!books) return;
+  booksList.innerHTML = "";
+  books.forEach((book) => {
+    const bookDiv = document.createElement("div");
+    bookDiv.classList.add("book");
+    const titleElement = document.createElement("h4");
+    titleElement.innerText = book.title;
+    const authorElement = document.createElement("h4");
+    authorElement.innerText = book.author;
+    const removeElement = document.createElement("button");
+    removeElement.classList.add("remove-btn");
+    removeElement.innerText = "Remove";
+    removeElement.setAttribute("data-id", book.index);
+
+    // Create Horizontal element
+    const horizontalElement = document.createElement("hr");
+    bookDiv.appendChild(titleElement);
+    bookDiv.appendChild(authorElement);
+    bookDiv.appendChild(removeElement);
+    bookDiv.appendChild(horizontalElement);
+    booksList.appendChild(bookDiv);
+  });
 }

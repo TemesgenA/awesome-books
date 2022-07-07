@@ -9,38 +9,33 @@
   </head>
 
   <body>
-    <div id="books">
+    <section class="books-container">
       <h1>Awesome Books</h1>
-      <h4>Book one</h4>
-      <p>James Cameron</p>
-      <button type="button" class="btn-remove">Remove</button>
-      <hr />
-      <h4>Book two</h4>
-      <p>David Oyedepo</p>
-      <button type="button" class="btn-remove">Remove</button>
-      <hr />
-    </div>
+      <br />
+      <div class="books-list">
+      </div>
+      <br />
+      <form id="book-form">
+        <div>
+          <input
+            type="text"
+            id="title"
+            placeholder="Book title"
+            required
+          /><br /><br />
+        </div>
+        <div>
+          <input
+            type="text"
+            id="author"
+            placeholder="Author"
+            required
+          /><br /><br />
+        </div>
+        <button type="button" class="add-book">Add</button>
+      </form>
+    </section>
 
-    <form id="book-form">
-      <div>
-        <input
-          type="text"
-          id="title"
-          placeholder="Book title"
-          required
-        /><br /><br />
-      </div>
-      <div>
-        <input
-          type="text"
-          id="author"
-          placeholder="Author"
-          required
-        /><br /><br />
-      </div>
-      <button type="button" class="add-book">Add</button>
-    </form>
-    
     <script src="scripts/app.js"></script>
   </body>
 </html>
