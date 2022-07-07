@@ -6,46 +6,28 @@ const addBookBtn = document.querySelector('.add-book');
 // Initilise books list
 const booksList = document.querySelector('.books-list');
 
-// Event to add a book to local storage
-addBookBtn.addEventListener("click", addBook);
-function addBook() {
-  if (!bookTitle.value || !bookAuthor.value) return;
-  const books = JSON.parse(localStorage.getItem("books")) || [];
-  const book = {};
-  book.title = bookTitle.value;
-  book.author = bookAuthor.value;
-  book.index = books.length;
-  books.push(book);
-
-  localStorage.setItem("books", JSON.stringify(books));
-  bookTitle.value = "";
-  bookAuthor.value = "";
-  displayBooks();
-}
-
 // Event to display books
-window.addEventListener("load", booksList);
+window.addEventListener('load', booksList);
 
 // Function to display books
 function displayBooks() {
-  const books = JSON.parse(localStorage.getItem("books")) || [];
-
+  const books = JSON.parse(localStorage.getItem('books')) || [];
   if (!books) return;
-  booksList.innerHTML = "";
+  booksList.innerHTML = '';
   books.forEach((book) => {
-    const bookDiv = document.createElement("div");
-    bookDiv.classList.add("book");
-    const titleElement = document.createElement("h4");
+    const bookDiv = document.createElement('div');
+    bookDiv.classList.add('book');
+    const titleElement = document.createElement('h4');
     titleElement.innerText = book.title;
-    const authorElement = document.createElement("h4");
+    const authorElement = document.createElement('h4');
     authorElement.innerText = book.author;
-    const removeElement = document.createElement("button");
-    removeElement.classList.add("remove-btn");
-    removeElement.innerText = "Remove";
-    removeElement.setAttribute("data-id", book.index);
+    const removeElement = document.createElement('button');
+    removeElement.classList.add('remove-btn');
+    removeElement.innerText = 'Remove';
+    removeElement.setAttribute('data-id', book.index);
 
     // Create Horizontal element
-    const horizontalElement = document.createElement("hr");
+    const horizontalElement = document.createElement('hr');
     bookDiv.appendChild(titleElement);
     bookDiv.appendChild(authorElement);
     bookDiv.appendChild(removeElement);
@@ -54,15 +36,32 @@ function displayBooks() {
   });
 }
 
+// Event to add a book to local storage
+function addBook() {
+  if (!bookTitle.value || !bookAuthor.value) return;
+  const books = JSON.parse(localStorage.getItem('books')) || [];
+  const book = {};
+  book.title = bookTitle.value;
+  book.author = bookAuthor.value;
+  book.index = books.length;
+  books.push(book);
+
+  localStorage.setItem('books', JSON.stringify(books));
+  bookTitle.value = '';
+  bookAuthor.value = '';
+  displayBooks();
+}
+addBookBtn.addEventListener('click', addBook);
+
 // Event to remove a book
-booksList.addEventListener("click", removeBook);
 function removeBook(e) {
   const item = e.target;
-  if (item.classList[0] === "remove-btn") {
-    const books = JSON.parse(localStorage.getItem("books"));
+  if (item.classList[0] === 'remove-btn') {
+    const books = JSON.parse(localStorage.getItem('books'));
     const indexInd = Number(item.dataset.id);
     const modified = books.filter((book) => book.index !== indexInd);
-    localStorage.setItem("books", JSON.stringify(modified));
+    localStorage.setItem('books', JSON.stringify(modified));
   }
   displayBooks();
 }
+booksList.addEventListener('click', removeBook);

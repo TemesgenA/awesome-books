@@ -1,6 +1,12 @@
+body {
+  background-color: whitesmoke;
+}
+
+.books-container {
+  padding-left: 10%;
+}
+
 h1 {
-  font-size: 50px;
-  line-height: 52px;
   color: #172b4d;
-  margin-top: 60px;
+  margin-top: 10%;
 }
