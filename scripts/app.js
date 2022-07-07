@@ -1,4 +1,4 @@
-// Initialize variables to add books to localStorage
+// Initialize variables to add books to local Storage
 const bookTitle = document.querySelector('#title');
 const bookAuthor = document.querySelector('#author');
 const addBookBtn = document.querySelector('.add-book');
@@ -6,35 +6,34 @@ const addBookBtn = document.querySelector('.add-book');
 // Initilise books list
 const booksList = document.querySelector('.books-list');
 
-// Event to display books
-window.addEventListener('load', booksList);
-
 // Function to display books
 function displayBooks() {
   const books = JSON.parse(localStorage.getItem('books')) || [];
   if (!books) return;
   booksList.innerHTML = '';
   books.forEach((book) => {
-    const bookDiv = document.createElement('div');
-    bookDiv.classList.add('book');
-    const titleElement = document.createElement('h4');
-    titleElement.innerText = book.title;
-    const authorElement = document.createElement('h4');
-    authorElement.innerText = book.author;
-    const removeElement = document.createElement('button');
-    removeElement.classList.add('remove-btn');
-    removeElement.innerText = 'Remove';
-    removeElement.setAttribute('data-id', book.index);
+    const displayBooksDiv = document.createElement('div');
+    displayBooksDiv.classList.add('book');
+    const bookTitleHeading = document.createElement('h4');
+    bookTitleHeading.innerText = book.title;
+    const bookAuthorHeading = document.createElement('h4');
+    bookAuthorHeading.innerText = book.author;
+    const bookRemoveBtn = document.createElement('button');
+    bookRemoveBtn.classList.add('remove-btn');
+    bookRemoveBtn.innerText = 'Remove';
+    bookRemoveBtn.setAttribute('data-id', book.index);
 
-    // Create Horizontal element
-    const horizontalElement = document.createElement('hr');
-    bookDiv.appendChild(titleElement);
-    bookDiv.appendChild(authorElement);
-    bookDiv.appendChild(removeElement);
-    bookDiv.appendChild(horizontalElement);
-    booksList.appendChild(bookDiv);
+    // Add hr element under list book
+    const dividingLine = document.createElement('hr');
+    displayBooksDiv.appendChild(bookTitleHeading);
+    displayBooksDiv.appendChild(bookAuthorHeading);
+    displayBooksDiv.appendChild(bookRemoveBtn);
+    displayBooksDiv.appendChild(dividingLine);
+    booksList.appendChild(displayBooksDiv);
   });
 }
+// Event to display books
+window.addEventListener('load', displayBooks);
 
 // Event to add a book to local storage
 function addBook() {
@@ -51,9 +50,11 @@ function addBook() {
   bookAuthor.value = '';
   displayBooks();
 }
+
+// Event to add books
 addBookBtn.addEventListener('click', addBook);
 
-// Event to remove a book
+// Function to remove a book
 function removeBook(e) {
   const item = e.target;
   if (item.classList[0] === 'remove-btn') {
@@ -64,4 +65,6 @@ function removeBook(e) {
   }
   displayBooks();
 }
+
+// Event to remove a book
 booksList.addEventListener('click', removeBook);
