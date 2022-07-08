@@ -6,6 +6,14 @@ const addBookBtn = document.querySelector('.add-book');
 // Initilise books list
 const booksList = document.querySelector('.books-list');
 
+// Class to Represent a Book
+class Book {
+  constructor(title, author) {
+    this.title = title;
+    this.author = author;
+  }
+}
+
 // Function to display books
 function displayBooks() {
   const books = JSON.parse(localStorage.getItem('books')) || [];
@@ -33,7 +41,7 @@ function displayBooks() {
   });
 }
 // Event to display books
-window.addEventListener('load', displayBooks);
+window.addEventListener('DOMContentLoaded', displayBooks);
 
 // Event to add a book to local storage
 function addBook() {
