@@ -10,30 +10,35 @@
 
   <body>
     <section class="books-container">
-      <h1>Awesome Books</h1>
+      <h1>All awesome books</h1>
       <br />
-      <div class="books-list">
+      <div class="books-list"></div>
+      <div class="hr-line"><hr /></div>
+      <br />
+      <div class="form">
+        <h2>Add a new book</h2>
+        <form id="book-form">
+          <div>
+            <input
+              type="text"
+              id="book-title"
+              placeholder="Book title"
+              required
+            /><br /><br />
+          </div>
+          <div>
+            <input
+              type="text"
+              id="book-author"
+              placeholder="Author"
+              required
+            /><br /><br />
+          </div>
+          <div class="add-book-btn">
+            <button type="button" class="add-book-btn">Add</button>
+          </div>
+        </form>
       </div>
-      <br />
-      <form id="book-form">
-        <div>
-          <input
-            type="text"
-            id="title"
-            placeholder="Book title"
-            required
-          /><br /><br />
-        </div>
-        <div>
-          <input
-            type="text"
-            id="author"
-            placeholder="Author"
-            required
-          /><br /><br />
-        </div>
-        <button type="button" class="add-book">Add</button>
-      </form>
     </section>
 
     <script src="scripts/app.js"></script>
