@@ -6,7 +6,7 @@
 
 body {
   background-color: #fff;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family: 'Brush Script MT', cursive;
 }
 
 section {
@@ -17,11 +17,12 @@ section {
   display: flex;
   margin-left: 10px;
   align-items: center;
-  gap: 5%;
+  gap: 12px;
 }
 
 .info h3 {
   margin-right: 5px;
+  font-family: 'Brush Script MT', cursive;
 }
 
 .book {
@@ -75,6 +76,10 @@ hr {
 
 .form h2 {
   margin-bottom: 18px;
+}
+
+input {
+  font-family: 'Brush Script MT', cursive;
 }
 
 .form form input {

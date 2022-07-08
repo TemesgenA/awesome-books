@@ -1,12 +1,46 @@
+/* eslint-disable max-classes-per-file */
+
 // Initialize variables to add books to local Storage
-const addBookBtn = document.querySelector(".add-book-btn");
-const booksList = document.querySelector(".books-list");
+const addBookBtn = document.querySelector('.add-book-btn');
+const booksList = document.querySelector('.books-list');
 
 // Class to Represent a Book
 class Book {
   constructor(title, author) {
     this.title = title;
     this.author = author;
+  }
+}
+
+// Class to handle local storage
+class Store {
+  static getBooks() {
+    let books;
+    if (localStorage.getItem('books') === null) {
+      books = [];
+    } else {
+      books = JSON.parse(localStorage.getItem('books'));
+    }
+
+    return books;
+  }
+
+  static addBook(book) {
+    const books = Store.getBooks();
+    books.push(book);
+    localStorage.setItem('books', JSON.stringify(books));
+  }
+
+  static removeBook(author) {
+    const books = Store.getBooks();
+
+    books.forEach((book, index) => {
+      if (book.author === author) {
+        books.splice(index, 1);
+      }
+    });
+
+    localStorage.setItem('books', JSON.stringify(books));
   }
 }
 
@@ -21,20 +55,20 @@ class UI {
   }
 
   static addBookToList(book) {
-    const displayBooksDiv = document.createElement("div");
-    displayBooksDiv.classList.add("book");
-    const bookTitleHeading = document.createElement("h4");
+    const displayBooksDiv = document.createElement('div');
+    displayBooksDiv.classList.add('book');
+    const bookTitleHeading = document.createElement('h4');
     bookTitleHeading.innerText = book.title;
-    const bookAuthorHeading = document.createElement("h4");
+    const bookAuthorHeading = document.createElement('h4');
     bookAuthorHeading.innerText = book.author;
-    const bookRemoveBtn = document.createElement("button");
-    bookRemoveBtn.classList.add("remove-btn");
-    bookRemoveBtn.innerText = "Remove";
-    bookRemoveBtn.setAttribute("data-id", book.index);
-    const infoDiv = document.createElement("div");
-    infoDiv.classList.add("info");
-    const linkElement = document.createElement("h4");
-    linkElement.innerText = "by";
+    const bookRemoveBtn = document.createElement('button');
+    bookRemoveBtn.classList.add('remove-btn');
+    bookRemoveBtn.innerText = 'Remove';
+    bookRemoveBtn.setAttribute('data-id', book.index);
+    const infoDiv = document.createElement('div');
+    infoDiv.classList.add('info');
+    const linkElement = document.createElement('h4');
+    linkElement.innerText = 'by';
     infoDiv.appendChild(bookTitleHeading);
     infoDiv.appendChild(linkElement);
     infoDiv.appendChild(bookAuthorHeading);
@@ -44,51 +78,19 @@ class UI {
   }
 
   static clearFields() {
-    document.getElementById("book-title").value = "";
-    document.getElementById("book-author").value = "";
+    document.getElementById('book-title').value = '';
+    document.getElementById('book-author').value = '';
   }
 
   static deleteBook(el) {
-    if (el.classList.contains("remove-btn")) {
+    if (el.classList.contains('remove-btn')) {
       el.parentElement.remove();
     }
   }
 }
 
-// Class to handle local storage
-class Store {
-  static getBooks() {
-    let books;
-    if (localStorage.getItem("books") === null) {
-      books = [];
-    } else {
-      books = JSON.parse(localStorage.getItem("books"));
-    }
-
-    return books;
-  }
-
-  static addBook(book) {
-    const books = Store.getBooks();
-    books.push(book);
-    localStorage.setItem("books", JSON.stringify(books));
-  }
-
-  static removeBook(author) {
-    const books = Store.getBooks();
-
-    books.forEach((book, index) => {
-      if (book.author === author) {
-        books.splice(index, 1);
-      }
-    });
-
-    localStorage.setItem("books", JSON.stringify(books));
-  }
-}
-
 // Event to display books
-document.addEventListener("DOMContentLoaded", UI.displayBooks);
+document.addEventListener('DOMContentLoaded', UI.displayBooks);
 
 // Event to add books
 addBookBtn.addEventListener('click', () => {
@@ -104,6 +106,5 @@ addBookBtn.addEventListener('click', () => {
 // Event to remove books
 booksList.addEventListener('click', (e) => {
   UI.deleteBook(e.target);
-  console.log(e.target.previousElementSibling.children[2]);
   Store.removeBook(e.target.previousElementSibling.children[2].textContent);
 });
