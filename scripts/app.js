@@ -14,32 +14,64 @@ class Book {
   }
 }
 
-// Function to display books
-function displayBooks() {
-  const books = JSON.parse(localStorage.getItem('books')) || [];
-  if (!books) return;
-  booksList.innerHTML = '';
-  books.forEach((book) => {
-    const displayBooksDiv = document.createElement('div');
-    displayBooksDiv.classList.add('book');
-    const bookTitleHeading = document.createElement('h4');
-    bookTitleHeading.innerText = book.title;
-    const bookAuthorHeading = document.createElement('h4');
-    bookAuthorHeading.innerText = book.author;
-    const bookRemoveBtn = document.createElement('button');
-    bookRemoveBtn.classList.add('remove-btn');
-    bookRemoveBtn.innerText = 'Remove';
-    bookRemoveBtn.setAttribute('data-id', book.index);
+// Class to display books
+class UI {
+  static displayBooks() {
+    const books = Store.getBooks();
 
-    // Add hr element under list book
-    const dividingLine = document.createElement('hr');
-    displayBooksDiv.appendChild(bookTitleHeading);
-    displayBooksDiv.appendChild(bookAuthorHeading);
-    displayBooksDiv.appendChild(bookRemoveBtn);
-    displayBooksDiv.appendChild(dividingLine);
-    booksList.appendChild(displayBooksDiv);
-  });
+    books.forEach((book) => {
+      UI.addBookToList(book);
+    });
+  }
+
+  static addBookToList(book) {
+    // create book Div
+    const bookDiv = document.createElement('div');
+    bookDiv.classList.add('book');
+
+    // Create title
+    const titleElement = document.createElement('h3');
+    titleElement.innerText = book.title;
+
+    // create Author
+    const authorElement = document.createElement('h3');
+    authorElement.innerText = book.author;
+
+    // Create Remove Btn
+    const removeElement = document.createElement('button');
+    removeElement.classList.add('remove-btn');
+    removeElement.innerText = 'Remove';
+    removeElement.setAttribute('data-id', book.index);
+
+    // Create infoDiv element
+    const infoDiv = document.createElement('div');
+    infoDiv.classList.add('info');
+
+    // create h3
+    const linkElement = document.createElement('h3');
+    linkElement.innerText = 'by';
+
+    infoDiv.appendChild(titleElement);
+    infoDiv.appendChild(linkElement);
+    infoDiv.appendChild(authorElement);
+
+    bookDiv.appendChild(infoDiv);
+    booksList.appendChild(bookDiv);
+    bookDiv.appendChild(removeElement);
+  }
+
+  static clearFields() {
+    document.getElementById('title-input').value = '';
+    document.getElementById('author-input').value = '';
+  }
+
+  static deleteBook(el) {
+    if (el.classList.contains('remove-btn')) {
+      el.parentElement.remove();
+    }
+  }
 }
+
 // Event to display books
 window.addEventListener('DOMContentLoaded', displayBooks);
 
