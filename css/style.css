@@ -6,7 +6,7 @@
 
 body {
   background-color: #fff;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 section {
@@ -17,6 +17,7 @@ section {
   display: flex;
   margin-left: 10px;
   align-items: center;
+  gap: 5%;
 }
 
 .info h3 {
