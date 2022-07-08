@@ -1,5 +1,5 @@
 // Initialize variables to add books to local Storage
-const addBookBtn = document.querySelector(".add-book");
+const addBookBtn = document.querySelector(".add-book-btn");
 const booksList = document.querySelector(".books-list");
 
 // Class to Represent a Book
@@ -44,8 +44,8 @@ class UI {
   }
 
   static clearFields() {
-    document.getElementById("title").value = "";
-    document.getElementById("author").value = "";
+    document.getElementById("book-title").value = "";
+    document.getElementById("book-author").value = "";
   }
 
   static deleteBook(el) {
@@ -91,9 +91,9 @@ class Store {
 document.addEventListener("DOMContentLoaded", UI.displayBooks);
 
 // Event to add books
-addBtn.addEventListener('click', () => {
-  const bookTitle = document.querySelector('#title').value;
-  const bookAuthor = document.querySelector('#author').value;
+addBookBtn.addEventListener('click', () => {
+  const bookTitle = document.querySelector('#book-title').value;
+  const bookAuthor = document.querySelector('#book-author').value;
   if (bookTitle && bookAuthor) {
     const book = new Book(bookTitle, bookAuthor);
     UI.addBookToList(book);
