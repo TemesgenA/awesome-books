@@ -21,44 +21,31 @@ class UI {
   }
 
   static addBookToList(book) {
-    // create book Div
-    const bookDiv = document.createElement("div");
-    bookDiv.classList.add("book");
-
-    // Create title
-    const titleElement = document.createElement("h3");
-    titleElement.innerText = book.title;
-
-    // create Author
-    const authorElement = document.createElement("h3");
-    authorElement.innerText = book.author;
-
-    // Create Remove Btn
-    const removeElement = document.createElement("button");
-    removeElement.classList.add("remove-btn");
-    removeElement.innerText = "Remove";
-    removeElement.setAttribute("data-id", book.index);
-
-    // Create infoDiv element
+    const displayBooksDiv = document.createElement("div");
+    displayBooksDiv.classList.add("book");
+    const bookTitleHeading = document.createElement("h4");
+    bookTitleHeading.innerText = book.title;
+    const bookAuthorHeading = document.createElement("h4");
+    bookAuthorHeading.innerText = book.author;
+    const bookRemoveBtn = document.createElement("button");
+    bookRemoveBtn.classList.add("remove-btn");
+    bookRemoveBtn.innerText = "Remove";
+    bookRemoveBtn.setAttribute("data-id", book.index);
     const infoDiv = document.createElement("div");
     infoDiv.classList.add("info");
-
-    // create h3
-    const linkElement = document.createElement("h3");
+    const linkElement = document.createElement("h4");
     linkElement.innerText = "by";
-
-    infoDiv.appendChild(titleElement);
+    infoDiv.appendChild(bookTitleHeading);
     infoDiv.appendChild(linkElement);
-    infoDiv.appendChild(authorElement);
-
-    bookDiv.appendChild(infoDiv);
-    booksList.appendChild(bookDiv);
-    bookDiv.appendChild(removeElement);
+    infoDiv.appendChild(bookAuthorHeading);
+    displayBooksDiv.appendChild(infoDiv);
+    booksList.appendChild(displayBooksDiv);
+    displayBooksDiv.appendChild(bookRemoveBtn);
   }
 
   static clearFields() {
-    document.getElementById("bookTitle").value = "";
-    document.getElementById("bookAuthor").value = "";
+    document.getElementById("title").value = "";
+    document.getElementById("author").value = "";
   }
 
   static deleteBook(el) {
@@ -87,11 +74,11 @@ class Store {
     localStorage.setItem("books", JSON.stringify(books));
   }
 
-  static removeBook(title) {
+  static removeBook(author) {
     const books = Store.getBooks();
 
     books.forEach((book, index) => {
-      if (book.isbn === isbn) {
+      if (book.author === author) {
         books.splice(index, 1);
       }
     });
